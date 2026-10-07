@@ -2,6 +2,11 @@ import os
 import time
 from openai import OpenAI
 
+try:
+    from app.schemas import QuestionExtractionResponse
+except ImportError:
+    from schemas import QuestionExtractionResponse
+
 # Load system prompt from file
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SYSTEM_PROMPT_PATH = os.path.join(BASE_DIR, "system_prompt", "system_prompt.txt")
@@ -41,6 +46,8 @@ stream = client.chat.completions.create(
     stream_options={"include_usage": True}
 )
 
+print("Response:\n")
+
 for chunk in stream:
     if chunk.choices and len(chunk.choices) > 0:
         delta = chunk.choices[0].delta
@@ -55,6 +62,15 @@ for chunk in stream:
 
 total_time = time.perf_counter() - start_time
 
+# Validate output schema
+print("\n\n" + "=" * 40)
+try:
+    validated_output = QuestionExtractionResponse.model_validate_json(full_response)
+    print("Schema Validation: SUCCESS")
+    print(f"Validated Questions Count: {len(validated_output.questions)}")
+except Exception as e:
+    print(f"Schema Validation: FAILED ({e})")
+
 input_tokens = usage_info.prompt_tokens if usage_info else 0
 output_tokens = usage_info.completion_tokens if usage_info else completion_tokens_count
 total_tokens = usage_info.total_tokens if usage_info else (input_tokens + output_tokens)
@@ -62,7 +78,7 @@ total_tokens = usage_info.total_tokens if usage_info else (input_tokens + output
 ttft = ttft if ttft is not None else total_time
 tps = output_tokens / total_time if total_time > 0 else 0
 
-print("\n\n" + "=" * 40)
+print("-" * 40)
 print(f"Input Tokens: {input_tokens}")
 print(f"Output Tokens: {output_tokens}")
 print(f"Total Tokens: {total_tokens}")
