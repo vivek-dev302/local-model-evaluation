@@ -175,6 +175,43 @@ def plot_memory(summaries: List[Dict[str, Any]], output_path: str) -> str:
     return output_path
 
 
+def plot_accuracy(summaries: List[Dict[str, Any]], output_path: str) -> str:
+    """Creates a standalone triage decision accuracy bar chart."""
+    labels = [f"{s['model']}\n(T={s['temperature']})" for s in summaries]
+    x = np.arange(len(labels))
+    palette = ["#10B981", "#059669", "#0284C7", "#0369A1"]
+    colors = [palette[i % len(palette)] for i in range(len(labels))]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    acc_values = [s.get("overall_accuracy_pct", 0.0) for s in summaries]
+    bars = ax.bar(x, acc_values, color=colors, width=0.5, edgecolor="#064E3B", linewidth=1)
+
+    ax.set_title("Unified Triage Decision Accuracy (%)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_ylabel("Weighted Accuracy (%)", fontsize=11)
+    ax.set_ylim(0, 100)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=10)
+    ax.grid(axis="y", linestyle="--", alpha=0.5)
+
+    for bar in bars:
+        h = bar.get_height()
+        ax.annotate(
+            f"{h:.1f}%",
+            xy=(bar.get_x() + bar.get_width() / 2, h),
+            xytext=(0, 4),
+            textcoords="offset points",
+            ha="center",
+            va="bottom",
+            fontsize=10,
+            fontweight="bold",
+        )
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
 def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     """Generates all individual charts separately and returns a dictionary of their paths."""
     charts_dir = get_charts_dir()
@@ -182,16 +219,19 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     throughput_path = os.path.join(charts_dir, "throughput_comparison.png")
     latency_path = os.path.join(charts_dir, "latency_comparison.png")
     reliability_path = os.path.join(charts_dir, "reliability_pie_chart.png")
+    accuracy_path = os.path.join(charts_dir, "accuracy_comparison.png")
     memory_path = os.path.join(charts_dir, "memory_footprint.png")
 
     plot_throughput(summaries, throughput_path)
     plot_latency(summaries, latency_path)
     plot_reliability_pie(summaries, reliability_path)
+    plot_accuracy(summaries, accuracy_path)
     plot_memory(summaries, memory_path)
 
     return {
         "throughput": throughput_path,
         "latency": latency_path,
         "reliability": reliability_path,
+        "accuracy": accuracy_path,
         "memory": memory_path,
     }

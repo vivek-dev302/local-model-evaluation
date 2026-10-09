@@ -49,7 +49,7 @@ def format_markdown_table(headers: List[str], rows: List[List[str]]) -> str:
 
 
 def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
-    """Generates the three core comparison tables (Throughput, Reliability, Resources)."""
+    """Generates the four core comparison tables (Throughput, Reliability, Accuracy, Resources)."""
     # 1. Throughput & Latency Table
     latency_headers = ["Model", "Temp", "Tokens/sec", "Avg TTFT (s)", "Avg Latency (s)", "Avg Out Tokens"]
     latency_rows = [
@@ -81,7 +81,21 @@ def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
     ]
     t2 = format_markdown_table(reliability_headers, reliability_rows)
 
-    # 3. Resource Footprint Table
+    # 3. Decision Quality & Accuracy Table
+    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)"]
+    accuracy_rows = [
+        [
+            s["model"],
+            str(s["temperature"]),
+            f"{s.get('overall_accuracy_pct', 0.0):.1f}%",
+            f"{s.get('category_accuracy_pct', 0.0):.1f}%",
+            f"{s.get('escalation_accuracy_pct', 0.0):.1f}%",
+        ]
+        for s in summaries
+    ]
+    t_acc = format_markdown_table(accuracy_headers, accuracy_rows)
+
+    # 4. Resource Footprint Table
     resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg System RAM"]
     resource_rows = [
         [
@@ -100,7 +114,9 @@ def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
     output.append(t1)
     output.append("\n\n### 2. Reliability & Schema Adherence\n")
     output.append(t2)
-    output.append("\n\n### 3. Resource Consumption Footprint\n")
+    output.append("\n\n### 3. Decision Quality & Accuracy (Ground Truth)\n")
+    output.append(t_acc)
+    output.append("\n\n### 4. Resource Consumption Footprint\n")
     output.append(t3)
     return "\n".join(output)
 
@@ -140,6 +156,19 @@ def save_benchmark_report(summaries: List[Dict[str, Any]], output_path: str = No
     ]
     t2 = format_markdown_table(reliability_headers, reliability_rows)
 
+    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)"]
+    accuracy_rows = [
+        [
+            s["model"],
+            str(s["temperature"]),
+            f"{s.get('overall_accuracy_pct', 0.0):.1f}%",
+            f"{s.get('category_accuracy_pct', 0.0):.1f}%",
+            f"{s.get('escalation_accuracy_pct', 0.0):.1f}%",
+        ]
+        for s in summaries
+    ]
+    t_acc = format_markdown_table(accuracy_headers, accuracy_rows)
+
     resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg System RAM"]
     resource_rows = [
         [
@@ -178,7 +207,17 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ---
 
-## 3. Resource Footprint (RAM Usage)
+## 3. Decision Quality & Accuracy (Ground Truth)
+
+![Accuracy Comparison](reports/charts/accuracy_comparison.png)
+
+{t_acc}
+
+*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment.*
+
+---
+
+## 4. Resource Footprint (RAM Usage)
 
 ![Memory Footprint](reports/charts/memory_footprint.png)
 
@@ -188,6 +227,8 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ## Key Observations
 
+- **Decision Quality & Accuracy**:
+  `phi4-mini:3.8b` leads with **~77% overall weighted triage accuracy** and **82–84% category routing**, compared to `llama3.2:3b` (**~73–75% overall accuracy** and **72–76% category routing**).
 - **Throughput vs Parameter Size**:
   `llama3.2:3b` achieved higher throughput (~7.19 tokens/sec at T=0.0) compared to `phi4-mini:3.8b` (~6.16 tokens/sec).
 - **Schema Reliability & Determinism**:

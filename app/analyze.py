@@ -4,6 +4,9 @@ from statistics import mean
 from typing import List, Dict, Any, Optional
 
 
+from app.evaluator import evaluate_report_accuracy
+
+
 def load_report(file_path: str) -> List[Dict[str, Any]]:
     """Reads a .jsonl report file line-by-line and returns a list of records."""
     records = []
@@ -56,12 +59,21 @@ def summarize_report(file_path: str) -> Dict[str, Any]:
 
     pass_rate = (len(passed_records) / total_records) * 100 if total_records > 0 else 0.0
 
+    # Calculate unified weighted accuracy against ground truths
+    acc_stats = evaluate_report_accuracy(records)
+
     return {
         "model": model_name,
         "temperature": temperature,
         "file_name": file_name,
         "file_path": file_path,
         "total_records": total_records,
+        # Unified Quality & Accuracy
+        "overall_accuracy_pct": acc_stats["overall_accuracy_pct"],
+        "category_accuracy_pct": acc_stats["category_accuracy_pct"],
+        "escalation_accuracy_pct": acc_stats["escalation_accuracy_pct"],
+        "priority_accuracy_pct": acc_stats["priority_accuracy_pct"],
+        "sentiment_accuracy_pct": acc_stats["sentiment_accuracy_pct"],
         # Reliability & Schema
         "passed_count": len(passed_records),
         "pass_rate_pct": round(pass_rate, 2),
@@ -86,11 +98,15 @@ def print_single_summary(summary: Dict[str, Any]) -> None:
     print(f"REPORT SUMMARY: {summary['model']} (Temp: {summary['temperature']})")
     print(f"File: {summary['file_name']} ({summary['total_records']} test cases)")
     print("-" * 60)
-    print("Reliability & Schema Validity:")
-    print(f"  - Total Passed:       {summary['passed_count']} / {summary['total_records']} ({summary['pass_rate_pct']}%)")
-    print(f"  - 1st Attempt Pass:   {summary['first_attempt_pass_count']}")
-    print(f"  - Retry Pass:         {summary['retry_pass_count']}")
-    print(f"  - Total Failed:       {summary['failed_count']}")
+    print("Decision Accuracy (Ground Truth):")
+    print(f"  - Overall Triage Accuracy: {summary['overall_accuracy_pct']}% (Weighted)")
+    print(f"  - Category Routing:        {summary['category_accuracy_pct']}%")
+    print(f"  - Escalation Correctness:  {summary['escalation_accuracy_pct']}%")
+    print("\nReliability & Schema Validity:")
+    print(f"  - Total Passed:            {summary['passed_count']} / {summary['total_records']} ({summary['pass_rate_pct']}%)")
+    print(f"  - 1st Attempt Pass:        {summary['first_attempt_pass_count']}")
+    print(f"  - Retry Pass:              {summary['retry_pass_count']}")
+    print(f"  - Total Failed:            {summary['failed_count']}")
     print("\nSpeed & Latency:")
     print(f"  - Avg Throughput:     {summary['avg_tokens_per_second']} tokens/sec")
     print(f"  - Avg TTFT:           {summary['avg_ttft_sec']} s")

@@ -33,7 +33,22 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ---
 
-## 3. Resource Footprint (RAM Usage)
+## 3. Decision Quality & Accuracy (Ground Truth)
+
+![Accuracy Comparison](reports/charts/accuracy_comparison.png)
+
+| Model          | Temp | Overall Accuracy (%) | Category Routing (%) | Escalation Match (%) |
+| -------------- | ---- | -------------------- | -------------------- | -------------------- |
+| llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                |
+| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                |
+| phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                |
+| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                |
+
+*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment.*
+
+---
+
+## 4. Resource Footprint (RAM Usage)
 
 ![Memory Footprint](reports/charts/memory_footprint.png)
 
@@ -48,6 +63,8 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ## Key Observations
 
+- **Decision Quality & Accuracy**:
+  `phi4-mini:3.8b` leads with **~77% overall weighted triage accuracy** and **82–84% category routing**, compared to `llama3.2:3b` (**~73–75% overall accuracy** and **72–76% category routing**).
 - **Throughput vs Parameter Size**:
   `llama3.2:3b` achieved higher throughput (~7.19 tokens/sec at T=0.0) compared to `phi4-mini:3.8b` (~6.16 tokens/sec).
 - **Schema Reliability & Determinism**:

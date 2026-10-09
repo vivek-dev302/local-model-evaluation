@@ -2,251 +2,401 @@
   {
     "id": 1,
     "category": "payment",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "My payment was deducted from my bank account, but the order status still shows pending."
   },
   {
     "id": 2,
     "category": "payment",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I was charged twice for the same transaction on my credit card. Please resolve this."
   },
   {
     "id": 3,
     "category": "payment",
+    "expected_priority": "medium",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "My payment failed at checkout with error code ERR_402. Is there an issue with your payment gateway?"
   },
   {
     "id": 4,
     "category": "payment",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I noticed an unauthorized charge of $89.99 on my bank statement from your service that I never made."
   },
   {
     "id": 5,
     "category": "payment",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Do you support PayPal or Apple Pay for international customers?"
   },
   {
     "id": 6,
     "category": "payment",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "My discount coupon applied at checkout, but the final billed amount did not include the 20% discount."
   },
   {
     "id": 7,
     "category": "refund",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "I returned my item 10 days ago using the prepaid shipping label. When will my refund be processed?"
   },
   {
     "id": 8,
     "category": "refund",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "The product arrived damaged in transit. I want an immediate full refund."
   },
   {
     "id": 9,
     "category": "refund",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Can I receive my refund directly as store credit instead of waiting for bank processing?"
   },
   {
     "id": 10,
     "category": "refund",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I only received a partial refund of $30 on a $100 order. Where is the remaining amount?"
   },
   {
     "id": 11,
     "category": "refund",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "My annual subscription auto-renewed yesterday without warning. I haven't used the app, please issue a refund."
   },
   {
     "id": 12,
     "category": "refund",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "Your return portal rejected my refund request claiming the 30-day window passed, but I received the product late."
   },
   {
     "id": 13,
     "category": "account",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I'm locked out of my account and not receiving the password reset verification email."
   },
   {
     "id": 14,
     "category": "account",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "I lost access to my 2FA authenticator app. How can I regain access to my primary account?"
   },
   {
     "id": 15,
     "category": "account",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "I received an email stating a new login from Russia, but I live in Canada. I think my account was hacked."
   },
   {
     "id": 16,
     "category": "account",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "How can I update my registered email address without losing my purchase history?"
   },
   {
     "id": 17,
     "category": "account",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "Please permanently delete my account and all associated personal data under GDPR guidelines."
   },
   {
     "id": 18,
     "category": "account",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "My account was suspended for suspected policy violations, but I believe this was done in error."
   },
   {
     "id": 19,
     "category": "delivery",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "The tracking status says 'Delivered' yesterday at 3 PM, but nothing arrived at my porch or mailbox."
   },
   {
     "id": 20,
     "category": "delivery",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "My delivery is delayed by 5 days and tracking hasn't updated since Monday. Where is my package?"
   },
   {
     "id": 21,
     "category": "delivery",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "I urgently need to change the shipping address for order #88419 before it leaves the warehouse."
   },
   {
     "id": 22,
     "category": "delivery",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "The package arrived opened and two out of five items were missing from the box."
   },
   {
     "id": 23,
     "category": "delivery",
+    "expected_priority": "medium",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Do you offer weekend or express overnight delivery for medical supplies?"
   },
   {
     "id": 24,
     "category": "delivery",
+    "expected_priority": "medium",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Customs is requesting an import fee invoice for my international shipment. Can you provide the receipt?"
   },
   {
     "id": 25,
     "category": "technical",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "The mobile app continuously crashes on launch immediately after updating to iOS 18."
   },
   {
     "id": 26,
     "category": "technical",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I am getting a 500 Internal Server Error every time I attempt to export my project to PDF."
   },
   {
     "id": 27,
     "category": "technical",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "The desktop app isn't syncing files with the cloud; it remains stuck at 'Syncing 1 of 40'."
   },
   {
     "id": 28,
     "category": "technical",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "Your REST API is returning 429 Too Many Requests even though our traffic is well under the rate limit."
   },
   {
     "id": 29,
     "category": "technical",
+    "expected_priority": "medium",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "The dashboard video player shows a black screen with audio only on Firefox browser."
   },
   {
     "id": 30,
     "category": "technical",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "My webhooks stopped receiving payload events since 10:00 AM UTC today."
   },
   {
     "id": 31,
     "category": "cancellation",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "I placed an order by mistake 10 minutes ago. Please cancel order #99231 immediately."
   },
   {
     "id": 32,
     "category": "cancellation",
+    "expected_priority": "medium",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "How do I cancel my monthly Pro subscription so that I won't be charged next billing cycle?"
   },
   {
     "id": 33,
     "category": "cancellation",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I tried clicking 'Cancel Subscription' in settings, but the button is greyed out and unclickable."
   },
   {
     "id": 34,
     "category": "cancellation",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "Please cancel my booking scheduled for Friday and confirm the cancellation policy terms."
   },
   {
     "id": 35,
     "category": "cancellation",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "neutral",
     "message": "I want to cancel the pre-order for the wireless headphones before the shipping date."
   },
   {
     "id": 36,
     "category": "cancellation",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I cancelled my trial before the renewal, but I was still charged $49. Please cancel and reverse this charge."
   },
   {
     "id": 37,
     "category": "complaint",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "This is the third time your customer rep hung up on me. Your customer service is utterly unacceptable."
   },
   {
     "id": 38,
     "category": "complaint",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "The quality of the material is terrible compared to what was advertised in your product photos."
   },
   {
     "id": 39,
     "category": "complaint",
+    "expected_priority": "urgent",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "Your software has had 3 outages during business hours this week, costing my company thousands."
   },
   {
     "id": 40,
     "category": "complaint",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "I was promised a replacement unit last week and nobody followed up or sent tracking info."
   },
   {
     "id": 41,
     "category": "complaint",
+    "expected_priority": "high",
+    "expected_requires_human": true,
+    "expected_sentiment": "frustrated",
     "message": "Your aggressive marketing emails continue spamming my inbox despite me unsubscribing four times."
   },
   {
     "id": 42,
     "category": "complaint",
+    "expected_priority": "medium",
+    "expected_requires_human": true,
+    "expected_sentiment": "negative",
     "message": "I've been a loyal customer for 5 years, but your recent price increase without prior notice is appalling."
   },
   {
     "id": 43,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Could you add dark mode support to the web dashboard in an upcoming update?"
   },
   {
     "id": 44,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "It would be great to have CSV/Excel bulk export for quarterly sales analytics."
   },
   {
     "id": 45,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Please consider integrating with Slack and Microsoft Teams for instant alert notifications."
   },
   {
     "id": 46,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Can you provide an option to customize keyboard shortcuts in the editor?"
   },
   {
     "id": 47,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "We would love multi-currency support (EUR and GBP) for our team workspace."
   },
   {
     "id": 48,
     "category": "feature_request",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Is there a plan to release an official Linux desktop client in the roadmap?"
   },
   {
     "id": 49,
     "category": "general",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "Where can I find documentation on setting up SSO with Okta for our enterprise organization?"
   },
   {
     "id": 50,
     "category": "general",
+    "expected_priority": "low",
+    "expected_requires_human": false,
+    "expected_sentiment": "neutral",
     "message": "What are your support team's operating hours during national holidays?"
   }
 ]
