@@ -1,6 +1,6 @@
-goal.md
 .venv/
 __pycache__/
 *.pyc
 .env
+goal.md
 .DS_Store

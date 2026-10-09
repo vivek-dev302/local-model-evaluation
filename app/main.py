@@ -41,6 +41,9 @@ def main():
     client = OpenAI(base_url=OLLAMA_BASE_URL, api_key=OLLAMA_API_KEY)
     report_file = get_report_file_path()
 
+    # Clear report file at the start of each run (fresh benchmark)
+    open(report_file, "w").close()
+
     print(f"Loaded {len(test_cases)} test cases | Model: {MODEL_NAME} | Temp: {TEMPERATURE}")
     print(f"Initial Ollama RAM: {get_ollama_ram_mb()} MB | System RAM: {get_system_ram_percent()}%")
     print(f"Saving reports to: {report_file}\n")
