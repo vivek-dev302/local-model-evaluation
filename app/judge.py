@@ -99,7 +99,6 @@ Evaluate the suggested response and output the JSON score."""
                 {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
-            extra_body={"think": False},
             temperature=0.0,
         )
         content = response.choices[0].message.content.strip()

@@ -4,10 +4,10 @@ from openai import OpenAI
 from pydantic import ValidationError
 
 try:
-    from app.metrics import get_ollama_ram_mb, get_system_ram_percent
+    from app.metrics import get_ollama_ram_mb, get_ollama_cpu_percent, prime_ollama_cpu
     from app.schemas import BenchmarkRecord, SupportTriageResponse
 except ImportError:
-    from metrics import get_ollama_ram_mb, get_system_ram_percent
+    from metrics import get_ollama_ram_mb, get_ollama_cpu_percent, prime_ollama_cpu
     from schemas import BenchmarkRecord, SupportTriageResponse
 
 
@@ -38,12 +38,12 @@ def run_triage_with_retry(
         else:
             print("Response:\n")
 
+        prime_ollama_cpu()
         stream = client.chat.completions.create(
             model=model_name,
             messages=messages,
             temperature=temperature,
             response_format={"type": "json_object"},
-            extra_body={"think": False},
             stream=True,
             stream_options={"include_usage": True},
         )
@@ -82,7 +82,7 @@ def run_triage_with_retry(
         ttft = ttft if ttft is not None else total_time
         tps = output_tokens / total_time if total_time > 0 else 0
         ollama_ram_mb = get_ollama_ram_mb()
-        system_ram_pct = get_system_ram_percent()
+        ollama_cpu_pct = get_ollama_cpu_percent()
 
         if is_valid:
             return BenchmarkRecord(
@@ -97,7 +97,7 @@ def run_triage_with_retry(
                 total_time=round(total_time, 4),
                 tokens_per_second=round(tps, 2),
                 ollama_ram_mb=ollama_ram_mb,
-                system_ram_percent=system_ram_pct,
+                ollama_cpu_percent=ollama_cpu_pct,
                 output=validated_output.model_dump(),
                 error=None,
                 raw_response=full_response,
@@ -122,7 +122,7 @@ def run_triage_with_retry(
                 total_time=round(total_time, 4),
                 tokens_per_second=round(tps, 2),
                 ollama_ram_mb=ollama_ram_mb,
-                system_ram_percent=system_ram_pct,
+                ollama_cpu_percent=ollama_cpu_pct,
                 output=None,
                 error=validation_error,
                 raw_response=full_response,

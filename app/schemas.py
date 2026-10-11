@@ -33,7 +33,8 @@ class BenchmarkRecord(BaseModel):
     total_time: float
     tokens_per_second: float
     ollama_ram_mb: float
-    system_ram_percent: float
+    system_ram_percent: Optional[float] = None
+    ollama_cpu_percent: Optional[float] = None
     output: Optional[Dict[str, Any]] = None
     error: Optional[str] = None
     raw_response: Optional[str] = None

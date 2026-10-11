@@ -12,7 +12,7 @@ try:
         TEST_CASES_PATH,
         get_report_file_path,
     )
-    from app.metrics import get_ollama_ram_mb, get_system_ram_percent, save_benchmark_record
+    from app.metrics import get_ollama_ram_mb, save_benchmark_record
     from app.triage_service import run_triage_with_retry
 except ImportError:
     from config import (
@@ -25,7 +25,7 @@ except ImportError:
         TEST_CASES_PATH,
         get_report_file_path,
     )
-    from metrics import get_ollama_ram_mb, get_system_ram_percent, save_benchmark_record
+    from metrics import get_ollama_ram_mb, save_benchmark_record
     from triage_service import run_triage_with_retry
 
 
@@ -45,7 +45,7 @@ def main():
     open(report_file, "w").close()
 
     print(f"Loaded {len(test_cases)} test cases | Model: {MODEL_NAME} | Temp: {TEMPERATURE}")
-    print(f"Initial Ollama RAM: {get_ollama_ram_mb()} MB | System RAM: {get_system_ram_percent()}%")
+    print(f"Initial Ollama RAM: {get_ollama_ram_mb()} MB")
     print(f"Saving reports to: {report_file}\n")
 
     for test_case in test_cases:

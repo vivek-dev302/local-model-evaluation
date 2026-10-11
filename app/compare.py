@@ -98,14 +98,14 @@ def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
     t_acc = format_markdown_table(accuracy_headers, accuracy_rows)
 
     # 4. Resource Footprint Table
-    resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg System RAM"]
+    resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg Ollama CPU (%)"]
     resource_rows = [
         [
             s["model"],
             str(s["temperature"]),
             f"{s['avg_ollama_ram_mb']:.1f} MB",
             f"{s['peak_ollama_ram_mb']:.1f} MB",
-            f"{s['avg_system_ram_pct']:.1f}%",
+            f"{s['avg_ollama_cpu_pct']:.1f}%" if s.get("avg_ollama_cpu_pct") is not None else "N/A",
         ]
         for s in summaries
     ]
@@ -172,14 +172,14 @@ def save_benchmark_report(summaries: List[Dict[str, Any]], output_path: str = No
     ]
     t_acc = format_markdown_table(accuracy_headers, accuracy_rows)
 
-    resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg System RAM"]
+    resource_headers = ["Model", "Temp", "Avg Ollama RAM", "Peak Ollama RAM", "Avg Ollama CPU (%)"]
     resource_rows = [
         [
             s["model"],
             str(s["temperature"]),
             f"{s['avg_ollama_ram_mb']:.1f} MB",
             f"{s['peak_ollama_ram_mb']:.1f} MB",
-            f"{s['avg_system_ram_pct']:.1f}%",
+            f"{s['avg_ollama_cpu_pct']:.1f}%" if s.get("avg_ollama_cpu_pct") is not None else "N/A",
         ]
         for s in summaries
     ]

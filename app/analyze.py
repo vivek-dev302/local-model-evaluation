@@ -51,6 +51,7 @@ def summarize_report(file_path: str) -> Dict[str, Any]:
 
     ollama_ram_vals = [r["ollama_ram_mb"] for r in records if r.get("ollama_ram_mb") is not None]
     sys_ram_vals = [r["system_ram_percent"] for r in records if r.get("system_ram_percent") is not None]
+    ollama_cpu_vals = [r["ollama_cpu_percent"] for r in records if r.get("ollama_cpu_percent") is not None]
 
     # Reliability and schema validity counts
     passed_records = [r for r in records if r.get("validation_passed") is True]
@@ -98,6 +99,7 @@ def summarize_report(file_path: str) -> Dict[str, Any]:
         "avg_ollama_ram_mb": round(mean(ollama_ram_vals), 2) if ollama_ram_vals else 0.0,
         "peak_ollama_ram_mb": round(max(ollama_ram_vals), 2) if ollama_ram_vals else 0.0,
         "avg_system_ram_pct": round(mean(sys_ram_vals), 2) if sys_ram_vals else 0.0,
+        "avg_ollama_cpu_pct": round(mean(ollama_cpu_vals), 1) if ollama_cpu_vals else None,
     }
 
 
@@ -128,7 +130,8 @@ def print_single_summary(summary: Dict[str, Any]) -> None:
     print("\nResource Footprint:")
     print(f"  - Avg Ollama RAM:     {summary['avg_ollama_ram_mb']} MB")
     print(f"  - Peak Ollama RAM:    {summary['peak_ollama_ram_mb']} MB")
-    print(f"  - Avg System RAM:     {summary['avg_system_ram_pct']}%")
+    if summary.get("avg_ollama_cpu_pct") is not None:
+        print(f"  - Avg Ollama CPU:     {summary['avg_ollama_cpu_pct']}%")
     print("=" * 60)
 
 
