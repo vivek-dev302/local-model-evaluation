@@ -14,7 +14,6 @@ try:
     )
     from app.metrics import get_ollama_ram_mb, get_system_ram_percent, save_benchmark_record
     from app.triage_service import run_triage_with_retry
-    from app.compare import run_comparison_pipeline
 except ImportError:
     from config import (
         MAX_RETRIES,
@@ -28,7 +27,6 @@ except ImportError:
     )
     from metrics import get_ollama_ram_mb, get_system_ram_percent, save_benchmark_record
     from triage_service import run_triage_with_retry
-    from compare import run_comparison_pipeline
 
 
 def main():
@@ -74,8 +72,7 @@ def main():
         print(f"Metrics: In={record.input_tokens}, Out={record.output_tokens}, TTFT={record.ttft}s, TPS={record.tokens_per_second} tokens/s")
         print("\n")
 
-    print("All test cases completed! Updating comparison reports and charts...\n")
-    run_comparison_pipeline()
+    print("All test cases completed!")
 
 
 if __name__ == "__main__":

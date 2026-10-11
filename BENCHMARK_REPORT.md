@@ -37,12 +37,12 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ![Accuracy Comparison](reports/charts/accuracy_comparison.png)
 
-| Model          | Temp | Overall Accuracy (%) | Category Routing (%) | Escalation Match (%) |
-| -------------- | ---- | -------------------- | -------------------- | -------------------- |
-| llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                |
-| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                |
-| phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                |
-| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                |
+| Model          | Temp | Overall Accuracy (%) | Category Routing (%) | Escalation Match (%) | Judge Quality (%) |
+| -------------- | ---- | -------------------- | -------------------- | -------------------- | ----------------- |
+| llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                | Pending           |
+| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                | Pending           |
+| phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                | Pending           |
+| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                | Pending           |
 
 *Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment.*
 

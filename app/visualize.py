@@ -212,6 +212,57 @@ def plot_accuracy(summaries: List[Dict[str, Any]], output_path: str) -> str:
     return output_path
 
 
+def plot_judge_quality(summaries: List[Dict[str, Any]], output_path: str) -> str:
+    """Creates a standalone LLM-as-a-judge quality score chart (overall % with sub-metrics)."""
+    labels = [f"{s['model']}\n(T={s['temperature']})" for s in summaries]
+    x = np.arange(len(labels))
+    palette = ["#8B5CF6", "#7C3AED", "#6D28D9", "#5B21B6"]
+    colors = [palette[i % len(palette)] for i in range(len(labels))]
+
+    quality_vals = [s.get("output_quality_pct") or 0.0 for s in summaries]
+
+    fig, ax = plt.subplots(figsize=(8.5, 5))
+    bars = ax.bar(x, quality_vals, color=colors, width=0.48, edgecolor="#4C1D95", linewidth=1.2)
+
+    ax.set_title("Response Quality Evaluation (LLM-as-a-Judge %)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_ylabel("Quality Score (%)", fontsize=11)
+    ax.set_ylim(0, 105)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=10)
+    ax.grid(axis="y", linestyle="--", alpha=0.5)
+
+    for idx, (bar, s) in enumerate(zip(bars, summaries)):
+        h = bar.get_height()
+        if h > 0:
+            sub_text = ""
+            if s.get("avg_empathy") is not None:
+                sub_text = f"\nEmp: {s['avg_empathy']} | Act: {s['avg_actionability']} | Con: {s['avg_conciseness']}"
+            ax.annotate(
+                f"{h:.1f}%{sub_text}",
+                xy=(bar.get_x() + bar.get_width() / 2, h),
+                xytext=(0, 4),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                fontweight="bold",
+            )
+        else:
+            ax.annotate(
+                "Pending",
+                xy=(bar.get_x() + bar.get_width() / 2, 5),
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                color="gray",
+            )
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
 def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     """Generates all individual charts separately and returns a dictionary of their paths."""
     charts_dir = get_charts_dir()
@@ -220,12 +271,14 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     latency_path = os.path.join(charts_dir, "latency_comparison.png")
     reliability_path = os.path.join(charts_dir, "reliability_pie_chart.png")
     accuracy_path = os.path.join(charts_dir, "accuracy_comparison.png")
+    judge_quality_path = os.path.join(charts_dir, "judge_quality.png")
     memory_path = os.path.join(charts_dir, "memory_footprint.png")
 
     plot_throughput(summaries, throughput_path)
     plot_latency(summaries, latency_path)
     plot_reliability_pie(summaries, reliability_path)
     plot_accuracy(summaries, accuracy_path)
+    plot_judge_quality(summaries, judge_quality_path)
     plot_memory(summaries, memory_path)
 
     return {
@@ -233,5 +286,6 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
         "latency": latency_path,
         "reliability": reliability_path,
         "accuracy": accuracy_path,
+        "judge_quality": judge_quality_path,
         "memory": memory_path,
     }

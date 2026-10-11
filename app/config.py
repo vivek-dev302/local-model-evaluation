@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENV_PATH = os.path.join(BASE_DIR, ".env")
 SYSTEM_PROMPT_PATH = os.path.join(BASE_DIR, "system_prompt", "system_prompt.txt")
+JUDGE_PROMPT_PATH = os.path.join(BASE_DIR, "system_prompt", "judge_prompt.txt")
 TEST_CASES_PATH = os.path.join(BASE_DIR, "test_cases.json")
 REPORTS_DIR_BASE = os.path.join(BASE_DIR, "reports")
 
@@ -14,6 +15,7 @@ OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY", "ollama")
 MODEL_NAME = os.getenv("MODEL_NAME", "llama3.2:3b")
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.0"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "1"))
+EVAL_MODEL = os.getenv("EVAL_MODEL", "ggozad/prometheus2")
 
 
 def get_report_file_path() -> str:

@@ -1,6 +1,7 @@
 import os
 import glob
 from typing import List, Dict, Any
+from app.judge import run_judge_on_all_reports
 from app.config import REPORTS_DIR_BASE, BASE_DIR
 from app.analyze import summarize_report
 from app.visualize import generate_all_charts
@@ -82,7 +83,7 @@ def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
     t2 = format_markdown_table(reliability_headers, reliability_rows)
 
     # 3. Decision Quality & Accuracy Table
-    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)"]
+    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)", "Judge Quality (%)"]
     accuracy_rows = [
         [
             s["model"],
@@ -90,6 +91,7 @@ def generate_comparison_views(summaries: List[Dict[str, Any]]) -> str:
             f"{s.get('overall_accuracy_pct', 0.0):.1f}%",
             f"{s.get('category_accuracy_pct', 0.0):.1f}%",
             f"{s.get('escalation_accuracy_pct', 0.0):.1f}%",
+            f"{s['output_quality_pct']:.1f}%" if s.get("output_quality_pct") is not None else "Pending",
         ]
         for s in summaries
     ]
@@ -156,7 +158,7 @@ def save_benchmark_report(summaries: List[Dict[str, Any]], output_path: str = No
     ]
     t2 = format_markdown_table(reliability_headers, reliability_rows)
 
-    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)"]
+    accuracy_headers = ["Model", "Temp", "Overall Accuracy (%)", "Category Routing (%)", "Escalation Match (%)", "Judge Quality (%)"]
     accuracy_rows = [
         [
             s["model"],
@@ -164,6 +166,7 @@ def save_benchmark_report(summaries: List[Dict[str, Any]], output_path: str = No
             f"{s.get('overall_accuracy_pct', 0.0):.1f}%",
             f"{s.get('category_accuracy_pct', 0.0):.1f}%",
             f"{s.get('escalation_accuracy_pct', 0.0):.1f}%",
+            f"{s['output_quality_pct']:.1f}%" if s.get("output_quality_pct") is not None else "Pending",
         ]
         for s in summaries
     ]
@@ -207,13 +210,16 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ---
 
-## 3. Decision Quality & Accuracy (Ground Truth)
+## 3. Decision Quality & Accuracy (Ground Truth & LLM Judge)
 
-![Accuracy Comparison](reports/charts/accuracy_comparison.png)
+<p align="center">
+  <img src="reports/charts/accuracy_comparison.png" width="49%" alt="Decision Accuracy" />
+  <img src="reports/charts/judge_quality.png" width="49%" alt="Judge Response Quality" />
+</p>
 
 {t_acc}
 
-*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment.*
+*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment. Judge Quality evaluates empathy, actionability, and conciseness.*
 
 ---
 
@@ -247,9 +253,11 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 def run_comparison_pipeline():
     print("=" * 70)
-    print("       MODEL COMPARISON BENCHMARK STUDY (PHASE 3)")
+    print("       MODEL COMPARISON BENCHMARK STUDY")
     print("=" * 70)
 
+    # First evaluate quality for all reports
+    run_judge_on_all_reports()
     summaries = run_comparisons()
     if not summaries:
         return

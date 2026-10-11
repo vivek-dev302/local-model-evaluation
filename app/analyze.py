@@ -5,6 +5,7 @@ from typing import List, Dict, Any, Optional
 
 
 from app.evaluator import evaluate_report_accuracy
+from app.judge import load_judge_summary
 
 
 def load_report(file_path: str) -> List[Dict[str, Any]]:
@@ -62,6 +63,10 @@ def summarize_report(file_path: str) -> Dict[str, Any]:
     # Calculate unified weighted accuracy against ground truths
     acc_stats = evaluate_report_accuracy(records)
 
+    # Check for cached LLM-as-a-judge quality score
+    judge_data = load_judge_summary(file_path)
+    quality_score = judge_data.get("avg_quality_pct") if judge_data else None
+
     return {
         "model": model_name,
         "temperature": temperature,
@@ -74,6 +79,10 @@ def summarize_report(file_path: str) -> Dict[str, Any]:
         "escalation_accuracy_pct": acc_stats["escalation_accuracy_pct"],
         "priority_accuracy_pct": acc_stats["priority_accuracy_pct"],
         "sentiment_accuracy_pct": acc_stats["sentiment_accuracy_pct"],
+        "output_quality_pct": quality_score,
+        "avg_empathy": judge_data.get("avg_empathy") if judge_data else None,
+        "avg_actionability": judge_data.get("avg_actionability") if judge_data else None,
+        "avg_conciseness": judge_data.get("avg_conciseness") if judge_data else None,
         # Reliability & Schema
         "passed_count": len(passed_records),
         "pass_rate_pct": round(pass_rate, 2),
@@ -102,6 +111,10 @@ def print_single_summary(summary: Dict[str, Any]) -> None:
     print(f"  - Overall Triage Accuracy: {summary['overall_accuracy_pct']}% (Weighted)")
     print(f"  - Category Routing:        {summary['category_accuracy_pct']}%")
     print(f"  - Escalation Correctness:  {summary['escalation_accuracy_pct']}%")
+    if summary.get("output_quality_pct") is not None:
+        print(f"  - Response Quality (Judge): {summary['output_quality_pct']}%")
+    else:
+        print(f"  - Response Quality (Judge): Pending (Run python -m app.judge)")
     print("\nReliability & Schema Validity:")
     print(f"  - Total Passed:            {summary['passed_count']} / {summary['total_records']} ({summary['pass_rate_pct']}%)")
     print(f"  - 1st Attempt Pass:        {summary['first_attempt_pass_count']}")
