@@ -43,6 +43,7 @@ def run_triage_with_retry(
             messages=messages,
             temperature=temperature,
             response_format={"type": "json_object"},
+            extra_body={"think": False},
             stream=True,
             stream_options={"include_usage": True},
         )

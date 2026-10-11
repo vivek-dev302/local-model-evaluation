@@ -1,0 +1,50 @@
+{"question_id": 1, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apology, clear next step, and concise response."}
+{"question_id": 2, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apology, clear next step, and concise communication."}
+{"question_id": 3, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apologizes, acknowledges the issue, provides clear next steps, and is concise."}
+{"question_id": 4, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Response shows empathy, provides clear next steps, and is concise."}
+{"question_id": 5, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy, provides partial information, and is concise."}
+{"question_id": 6, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Apologizes and shows empathy, but lacks specific next steps."}
+{"question_id": 7, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear next steps, polite tone, and concise response."}
+{"question_id": 8, "empathy": 5, "actionability": 5, "conciseness": 4, "quality_pct": 93.3, "critique": "Excellent empathy and clear action, but slightly verbose."}
+{"question_id": 9, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Empathetic response with clear next steps, very concise."}
+{"question_id": 10, "empathy": 4, "actionability": 4, "conciseness": 5, "quality_pct": 86.7, "critique": "Apologizes and promises action, but lacks specific next steps."}
+{"question_id": 11, "empathy": 5, "actionability": 5, "conciseness": 4, "quality_pct": 93.3, "critique": "Excellent empathy and clear action, but slightly less concise."}
+{"question_id": 12, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "The response shows empathy, offers a clear next step, and is concise."}
+{"question_id": 13, "empathy": 5, "actionability": 5, "conciseness": 4, "quality_pct": 93.3, "critique": "Excellent empathy and clear next step, but slightly less concise."}
+{"question_id": 14, "empathy": 4, "actionability": 4, "conciseness": 4, "quality_pct": 80.0, "critique": "Shows empathy, provides a next step, but could be more concise."}
+{"question_id": 15, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "The response shows genuine empathy, provides clear next steps, and is concise."}
+{"question_id": 16, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear instructions provided, maintains a polite tone, and is concise."}
+{"question_id": 17, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Shows understanding, provides clear next steps, and is concise."}
+{"question_id": 18, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "The response shows genuine empathy, provides clear next steps, and is concise."}
+{"question_id": 19, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy, but lacks specific next steps; concise and polite."}
+{"question_id": 20, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy and apologizes, but lacks specific next steps."}
+{"question_id": 21, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Response shows urgency understanding, provides clear next step, and is concise."}
+{"question_id": 22, "empathy": 5, "actionability": 5, "conciseness": 4, "quality_pct": 93.3, "critique": "Excellent empathy and clear action, but slightly less concise."}
+{"question_id": 23, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Shows empathy, provides clear next steps, and is concise."}
+{"question_id": 24, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear next step, very concise, and shows understanding."}
+{"question_id": 25, "empathy": 4, "actionability": 4, "conciseness": 4, "quality_pct": 80.0, "critique": "Shows empathy, provides actionable steps, but could be more concise."}
+{"question_id": 26, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy, acknowledges the issue, but lacks specific next steps."}
+{"question_id": 27, "empathy": 4, "actionability": 4, "conciseness": 5, "quality_pct": 86.7, "critique": "Apologizes and offers a solution, but escalation is vague."}
+{"question_id": 28, "empathy": 5, "actionability": 4, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear apology and next steps, but lacks specific technical guidance."}
+{"question_id": 29, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Empathetic response with clear actionable steps and concise instructions."}
+{"question_id": 30, "empathy": 5, "actionability": 4, "conciseness": 5, "quality_pct": 93.3, "critique": "The response shows empathy, provides an actionable step, and is concise."}
+{"question_id": 31, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Response shows empathy, provides clear next steps, and is concise."}
+{"question_id": 32, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear instructions provided, empathetic tone, and concise response."}
+{"question_id": 33, "empathy": 5, "actionability": 4, "conciseness": 4, "quality_pct": 86.7, "critique": "Apologizes and takes action, but could be more concise."}
+{"question_id": 34, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Clear next steps, concise, and maintains a polite tone."}
+{"question_id": 35, "empathy": 4, "actionability": 5, "conciseness": 5, "quality_pct": 93.3, "critique": "Empathetic acknowledgment with clear next step, very concise."}
+{"question_id": 36, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apologizes, provides clear next steps, and is concise."}
+{"question_id": 37, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apology acknowledges frustration, escalation ensures resolution, response is clear and concise."}
+{"question_id": 38, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "The response shows genuine empathy, provides clear next steps, and is concise."}
+{"question_id": 39, "empathy": 5, "actionability": 4, "conciseness": 4, "quality_pct": 86.7, "critique": "Strong empathy, clear next steps, but could be more concise."}
+{"question_id": 40, "empathy": 5, "actionability": 4, "conciseness": 4, "quality_pct": 86.7, "critique": "Strong empathy and apology, but lacks specific next steps."}
+{"question_id": 41, "empathy": 5, "actionability": 5, "conciseness": 5, "quality_pct": 100.0, "critique": "Apologizes sincerely, confirms action, and is concise."}
+{"question_id": 42, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy and appreciation, but lacks immediate actionable steps."}
+{"question_id": 43, "empathy": 4, "actionability": 2, "conciseness": 5, "quality_pct": 73.3, "critique": "Shows appreciation, but lacks specific next steps or solutions."}
+{"question_id": 44, "empathy": 3, "actionability": 1, "conciseness": 5, "quality_pct": 60.0, "critique": "Shows appreciation but lacks actionable steps; response is concise."}
+{"question_id": 45, "empathy": 4, "actionability": 2, "conciseness": 5, "quality_pct": 73.3, "critique": "Shows appreciation but lacks immediate actionable steps, concise enough."}
+{"question_id": 46, "empathy": 3, "actionability": 2, "conciseness": 5, "quality_pct": 66.7, "critique": "Shows appreciation but lacks specific next steps or solution, concise and well-phrased."}
+{"question_id": 47, "empathy": 3, "actionability": 2, "conciseness": 5, "quality_pct": 66.7, "critique": "Shows appreciation but lacks specific next steps or acknowledgment of the request's importance."}
+{"question_id": 48, "empathy": 4, "actionability": 3, "conciseness": 5, "quality_pct": 80.0, "critique": "Shows empathy, provides a polite response, but lacks specific actionable steps."}
+{"question_id": 49, "empathy": 3, "actionability": 5, "conciseness": 5, "quality_pct": 86.7, "critique": "Provides clear next steps and is concise, but lacks personalized empathy."}
+{"question_id": 50, "empathy": 3, "actionability": 5, "conciseness": 5, "quality_pct": 86.7, "critique": "Clear next steps provided, very concise, but lacks personalized empathy."}

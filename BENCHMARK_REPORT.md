@@ -33,18 +33,21 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ---
 
-## 3. Decision Quality & Accuracy (Ground Truth)
+## 3. Decision Quality & Accuracy (Ground Truth & LLM Judge)
 
-![Accuracy Comparison](reports/charts/accuracy_comparison.png)
+<p align="center">
+  <img src="reports/charts/accuracy_comparison.png" width="49%" alt="Decision Accuracy" />
+  <img src="reports/charts/judge_quality.png" width="49%" alt="Judge Response Quality" />
+</p>
 
 | Model          | Temp | Overall Accuracy (%) | Category Routing (%) | Escalation Match (%) | Judge Quality (%) |
 | -------------- | ---- | -------------------- | -------------------- | -------------------- | ----------------- |
-| llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                | Pending           |
-| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                | Pending           |
-| phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                | Pending           |
-| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                | Pending           |
+| llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                | 89.9%             |
+| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                | 89.2%             |
+| phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                | 89.2%             |
+| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                | 90.3%             |
 
-*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment.*
+*Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment. Judge Quality evaluates empathy, actionability, and conciseness.*
 
 ---
 
