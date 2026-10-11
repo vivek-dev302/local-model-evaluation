@@ -3,14 +3,14 @@ import json
 import re
 from typing import List, Dict, Any, Optional
 from openai import OpenAI
-from app.config import (
+from app.scripts.config import (
     OLLAMA_BASE_URL,
     OLLAMA_API_KEY,
     EVAL_MODEL,
     REPORTS_DIR_BASE,
     JUDGE_PROMPT_PATH,
 )
-from app.evaluator import load_ground_truths
+from app.scripts.evaluator import load_ground_truths
 
 
 def _read_report_lines(file_path: str) -> List[Dict[str, Any]]:

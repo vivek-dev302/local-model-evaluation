@@ -1,7 +1,7 @@
 import psutil
 
 try:
-    from app.schemas import BenchmarkRecord
+    from app.scripts.schemas import BenchmarkRecord
 except ImportError:
     from schemas import BenchmarkRecord
 

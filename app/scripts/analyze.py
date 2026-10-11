@@ -4,8 +4,8 @@ from statistics import mean
 from typing import List, Dict, Any, Optional
 
 
-from app.evaluator import evaluate_report_accuracy
-from app.judge import load_judge_summary
+from app.scripts.evaluator import evaluate_report_accuracy
+from app.scripts.judge import load_judge_summary
 
 
 def load_report(file_path: str) -> List[Dict[str, Any]]:
@@ -137,7 +137,7 @@ def print_single_summary(summary: Dict[str, Any]) -> None:
 
 if __name__ == "__main__":
     import sys
-    from app.config import REPORTS_DIR_BASE
+    from app.scripts.config import REPORTS_DIR_BASE
 
     # If user passes a specific file path, use it. Otherwise test on the first available report.
     if len(sys.argv) > 1:

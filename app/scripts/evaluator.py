@@ -1,6 +1,6 @@
 import json
 from typing import Dict, Any, List, Optional
-from app.config import TEST_CASES_PATH
+from app.scripts.config import TEST_CASES_PATH
 
 # Weights for unified composite triage accuracy
 WEIGHT_CATEGORY = 0.40

@@ -4,8 +4,8 @@ from openai import OpenAI
 from pydantic import ValidationError
 
 try:
-    from app.metrics import get_ollama_ram_mb, get_ollama_cpu_percent, prime_ollama_cpu
-    from app.schemas import BenchmarkRecord, SupportTriageResponse
+    from app.scripts.metrics import get_ollama_ram_mb, get_ollama_cpu_percent, prime_ollama_cpu
+    from app.scripts.schemas import BenchmarkRecord, SupportTriageResponse
 except ImportError:
     from metrics import get_ollama_ram_mb, get_ollama_cpu_percent, prime_ollama_cpu
     from schemas import BenchmarkRecord, SupportTriageResponse

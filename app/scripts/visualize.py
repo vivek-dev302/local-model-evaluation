@@ -3,7 +3,7 @@ from typing import List, Dict, Any
 import matplotlib.pyplot as plt
 import numpy as np
 
-from app.config import REPORTS_DIR_BASE
+from app.scripts.config import REPORTS_DIR_BASE
 
 
 def get_charts_dir() -> str:
