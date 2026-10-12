@@ -13,10 +13,12 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 | Model          | Temp | Tokens/sec | Avg TTFT (s) | Avg Latency (s) | Avg Out Tokens |
 | -------------- | ---- | ---------- | ------------ | --------------- | -------------- |
-| llama3.2_3b    | 0.0  | 7.19       | 3.288        | 15.21           | 108.3          |
-| llama3.2_3b    | 0.7  | 5.98       | 3.599        | 18.66           | 111.7          |
-| phi4-mini_3.8b | 0.0  | 6.16       | 3.513        | 16.39           | 98.2           |
-| phi4-mini_3.8b | 0.7  | 5.86       | 3.121        | 16.88           | 98.0           |
+| llama3.2_3b    | 0.0  | 7.44       | 3.628        | 14.81           | 108.3          |
+| llama3.2_3b    | 0.7  | 7.63       | 3.025        | 14.18           | 108.2          |
+| phi4-mini_3.8b | 0.0  | 6.70       | 3.422        | 14.90           | 98.2           |
+| phi4-mini_3.8b | 0.7  | 6.69       | 2.990        | 14.60           | 97.6           |
+| qwen2.5_3b     | 0.0  | 8.12       | 3.238        | 11.84           | 94.4           |
+| qwen2.5_3b     | 0.7  | 8.40       | 2.906        | 11.33           | 95.2           |
 
 ---
 
@@ -27,9 +29,11 @@ This report evaluates local small language models (SLMs) on offline customer tri
 | Model          | Temp | Tests | 1st Pass | Retry Pass | Failed | Pass Rate (%) |
 | -------------- | ---- | ----- | -------- | ---------- | ------ | ------------- |
 | llama3.2_3b    | 0.0  | 50    | 46       | 3          | 1      | 98.0%         |
-| llama3.2_3b    | 0.7  | 50    | 46       | 4          | 0      | 100.0%        |
+| llama3.2_3b    | 0.7  | 50    | 48       | 2          | 0      | 100.0%        |
 | phi4-mini_3.8b | 0.0  | 50    | 50       | 0          | 0      | 100.0%        |
 | phi4-mini_3.8b | 0.7  | 50    | 50       | 0          | 0      | 100.0%        |
+| qwen2.5_3b     | 0.0  | 50    | 49       | 1          | 0      | 100.0%        |
+| qwen2.5_3b     | 0.7  | 50    | 48       | 2          | 0      | 100.0%        |
 
 ---
 
@@ -43,9 +47,11 @@ This report evaluates local small language models (SLMs) on offline customer tri
 | Model          | Temp | Overall Accuracy (%) | Category Routing (%) | Escalation Match (%) | Judge Quality (%) |
 | -------------- | ---- | -------------------- | -------------------- | -------------------- | ----------------- |
 | llama3.2_3b    | 0.0  | 73.4%                | 72.0%                | 88.0%                | 89.9%             |
-| llama3.2_3b    | 0.7  | 75.2%                | 76.0%                | 92.0%                | 89.2%             |
+| llama3.2_3b    | 0.7  | 76.6%                | 78.0%                | 88.0%                | 88.8%             |
 | phi4-mini_3.8b | 0.0  | 77.2%                | 82.0%                | 84.0%                | 89.2%             |
-| phi4-mini_3.8b | 0.7  | 76.8%                | 84.0%                | 84.0%                | 90.3%             |
+| phi4-mini_3.8b | 0.7  | 75.0%                | 84.0%                | 82.0%                | 90.3%             |
+| qwen2.5_3b     | 0.0  | 76.2%                | 76.0%                | 86.0%                | 89.1%             |
+| qwen2.5_3b     | 0.7  | 75.6%                | 76.0%                | 88.0%                | 88.1%             |
 
 *Overall Accuracy is a unified weighted composite score calibrated across triage requirements: 40% Department Routing (Category), 30% Human Escalation (`requires_human`), 20% Queue Priority, and 10% Customer Sentiment. Judge Quality evaluates empathy, actionability, and conciseness.*
 
@@ -55,12 +61,14 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ![Memory Footprint](reports/charts/memory_footprint.png)
 
-| Model          | Temp | Avg Ollama RAM | Peak Ollama RAM | Avg System RAM |
-| -------------- | ---- | -------------- | --------------- | -------------- |
-| llama3.2_3b    | 0.0  | 105.5 MB       | 106.0 MB        | 74.2%          |
-| llama3.2_3b    | 0.7  | 238.2 MB       | 271.1 MB        | 86.1%          |
-| phi4-mini_3.8b | 0.0  | 92.1 MB        | 225.4 MB        | 73.4%          |
-| phi4-mini_3.8b | 0.7  | 76.8 MB        | 78.9 MB         | 78.2%          |
+| Model          | Temp | Avg Ollama RAM | Peak Ollama RAM | Avg Ollama CPU (%) |
+| -------------- | ---- | -------------- | --------------- | ------------------ |
+| llama3.2_3b    | 0.0  | 2598.0 MB      | 2598.8 MB       | 39.6%              |
+| llama3.2_3b    | 0.7  | 2599.3 MB      | 2601.3 MB       | 40.5%              |
+| phi4-mini_3.8b | 0.0  | 3284.5 MB      | 5301.5 MB       | 40.4%              |
+| phi4-mini_3.8b | 0.7  | 2725.8 MB      | 3109.6 MB       | 41.2%              |
+| qwen2.5_3b     | 0.0  | 2221.2 MB      | 2222.1 MB       | 37.9%              |
+| qwen2.5_3b     | 0.7  | 2222.1 MB      | 2223.3 MB       | 39.0%              |
 
 ---
 
