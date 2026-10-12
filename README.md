@@ -1,4 +1,4 @@
-# 🛡️ Local AI Support Triage Assistant
+# 🛡️ local-model-evaluation: Local AI Support Triage Assistant
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Ollama](https://img.shields.io/badge/Inference-Ollama-black?logo=ollama&logoColor=white)](https://ollama.ai/)
@@ -69,12 +69,15 @@ Customer Ticket ──► Ollama (Local SLM) ──► Pydantic JSON Validation
 
 ### 1. Setup Environment
 ```bash
-git clone https://github.com/your-username/local-ai-assistant.git
-cd local-ai-assistant
+git clone https://github.com/vivek-dev302/local-model-evaluation.git
+cd local-model-evaluation
 
 python -m venv .venv
 .venv\Scripts\activate      # Windows (or: source .venv/bin/activate on Linux/Mac)
 pip install -r requirements.txt
+
+# Copy example configuration
+copy .env.example .env      # Windows (or: cp .env.example .env on Linux/Mac)
 ```
 
 ### 2. Pull Models in Ollama
@@ -117,7 +120,11 @@ This automatically:
 
 ```text
 ├── BENCHMARK_REPORT.md     # Full benchmark tables and deep analysis
+├── README.md               # Quickstart and benchmark summary
+├── requirements.txt        # Python package dependencies
+├── .env.example            # Environment configuration template
 ├── test_cases.json         # 50 labeled ground-truth customer tickets
+
 ├── system_prompt/          # Triage & LLM-Judge system prompts
 ├── app/
 │   ├── main.py             # Runs benchmark on active model in .env
