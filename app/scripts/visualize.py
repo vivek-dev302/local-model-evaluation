@@ -175,6 +175,54 @@ def plot_memory(summaries: List[Dict[str, Any]], output_path: str) -> str:
     return output_path
 
 
+def plot_cpu(summaries: List[Dict[str, Any]], output_path: str) -> str:
+    """Creates a standalone CPU utilization bar chart."""
+    labels = [f"{s['model']}\n(T={s['temperature']})" for s in summaries]
+    x = np.arange(len(labels))
+    palette = ["#3B82F6", "#2563EB", "#1D4ED8", "#1E40AF", "#0284C7", "#0369A1"]
+    colors = [palette[i % len(palette)] for i in range(len(labels))]
+
+    cpu_vals = [s.get("avg_ollama_cpu_pct") or 0.0 for s in summaries]
+
+    fig, ax = plt.subplots(figsize=(8.5, 5))
+    bars = ax.bar(x, cpu_vals, color=colors, width=0.48, edgecolor="#1E3A8A", linewidth=1.2)
+
+    ax.set_title("Ollama Inference CPU Utilization (%)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_ylabel("CPU Utilization (%)", fontsize=11)
+    ax.set_ylim(0, 100)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=10)
+    ax.grid(axis="y", linestyle="--", alpha=0.5)
+
+    for bar, val in zip(bars, cpu_vals):
+        if val > 0:
+            h = bar.get_height()
+            ax.annotate(
+                f"{h:.1f}%",
+                xy=(bar.get_x() + bar.get_width() / 2, h),
+                xytext=(0, 4),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                fontweight="bold",
+            )
+        else:
+            ax.annotate(
+                "N/A",
+                xy=(bar.get_x() + bar.get_width() / 2, 5),
+                ha="center",
+                va="bottom",
+                fontsize=9,
+                color="gray",
+            )
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
 def plot_accuracy(summaries: List[Dict[str, Any]], output_path: str) -> str:
     """Creates a standalone triage decision accuracy bar chart."""
     labels = [f"{s['model']}\n(T={s['temperature']})" for s in summaries]
@@ -273,6 +321,7 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     accuracy_path = os.path.join(charts_dir, "accuracy_comparison.png")
     judge_quality_path = os.path.join(charts_dir, "judge_quality.png")
     memory_path = os.path.join(charts_dir, "memory_footprint.png")
+    cpu_path = os.path.join(charts_dir, "cpu_utilization.png")
 
     plot_throughput(summaries, throughput_path)
     plot_latency(summaries, latency_path)
@@ -280,6 +329,7 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
     plot_accuracy(summaries, accuracy_path)
     plot_judge_quality(summaries, judge_quality_path)
     plot_memory(summaries, memory_path)
+    plot_cpu(summaries, cpu_path)
 
     return {
         "throughput": throughput_path,
@@ -288,4 +338,5 @@ def generate_all_charts(summaries: List[Dict[str, Any]]) -> Dict[str, str]:
         "accuracy": accuracy_path,
         "judge_quality": judge_quality_path,
         "memory": memory_path,
+        "cpu": cpu_path,
     }

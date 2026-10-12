@@ -194,9 +194,12 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ---
 
-## 4. Resource Footprint (RAM Usage)
+## 4. Resource Footprint (Memory & CPU Utilization)
 
-![Memory Footprint](reports/charts/memory_footprint.png)
+<p align="center">
+  <img src="reports/charts/memory_footprint.png" width="49%" alt="Memory Footprint" />
+  <img src="reports/charts/cpu_utilization.png" width="49%" alt="CPU Utilization" />
+</p>
 
 {t3}
 
@@ -204,16 +207,16 @@ This report evaluates local small language models (SLMs) on offline customer tri
 
 ## Key Observations
 
-- **Decision Quality & Accuracy**:
-  `phi4-mini:3.8b` leads with **~77% overall weighted triage accuracy** and **82–84% category routing**, compared to `llama3.2:3b` (**~73–75% overall accuracy** and **72–76% category routing**).
-- **Throughput vs Parameter Size**:
-  `llama3.2:3b` achieved higher throughput (~7.19 tokens/sec at T=0.0) compared to `phi4-mini:3.8b` (~6.16 tokens/sec).
-- **Schema Reliability & Determinism**:
-  `phi4-mini:3.8b` demonstrated superior schema adherence, passing **100% of test cases on the first attempt (50/50)** with **0 retries** across both temperature settings. `llama3.2:3b` required retry reprompts to repair JSON schemas.
-- **Temperature Impact**:
-  Higher temperature (`temp=0.7`) slightly degraded throughput and increased total latency across both models due to increased stochastic token exploration.
-- **Memory Footprint**:
-  Both models stayed within compact local memory limits (<250 MB Ollama process RAM), making them suitable for constrained edge deployments.
+- **Throughput & Speed Champion**:
+  `qwen2.5_3b` achieved the highest inference throughput (**8.12–8.40 tokens/sec**) with the lowest average latency (~11.3s), outperforming both `llama3.2_3b` (~7.4–7.6 tokens/sec) and `phi4-mini_3.8b` (~6.7 tokens/sec).
+- **Decision Quality & Routing Accuracy**:
+  `phi4-mini:3.8b` maintains the highest triage routing accuracy (**82–84% category accuracy** and **75–77% overall weighted score**). `qwen2.5:3b` is closely competitive at **~76% overall accuracy** and **76% category routing**.
+- **LLM Judge Response Quality**:
+  All three models achieved strong response quality scores (~88–90%) evaluated by Flow-Judge across empathy, actionability, and conciseness, with `phi4-mini` peaking at **90.3%**.
+- **Schema Reliability**:
+  `phi4-mini:3.8b` and `qwen2.5:3b` demonstrated exceptional schema adherence (98–100% first-pass rate with 0–1 retries), whereas `llama3.2:3b` required more frequent retries to repair schemas.
+- **Resource Footprint (RAM & CPU)**:
+  `qwen2.5:3b` has the leanest memory footprint (~2.2 GB RAM), while `llama3.2:3b` requires ~2.6 GB and `phi4-mini:3.8b` consumes 2.7–3.3 GB. All three models saturated ~38–41% normalized CPU across 8 logical cores during inference.
 """
 
     with open(output_path, "w", encoding="utf-8") as f:
